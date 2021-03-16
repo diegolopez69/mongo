@@ -5,6 +5,7 @@ const mongoose = require('mongoose') //Pedimos la libreria mongoose
 const app = express()
 
 
+//DATABASE_URL=mongodb://localhost/infoPersonal
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
 const db = mongoose.connection
 db.on('error', (error) => console.error(error)) //Si la conexión falla nos da el error
