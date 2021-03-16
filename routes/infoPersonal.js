@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const Subscriber = require('../models/infoPersonal')
+const infoPersonal = require('../models/infoPersonal')
 
 // Getting all
 router.get('/', async (req, res) => {
   try {
-    const subscribers = await Subscriber.find()
+    const subscribers = await infoPersonal.find()
     res.json(subscribers)
   } catch (err) {
     res.status(500).json({ message: err.message })
@@ -19,7 +19,7 @@ router.get('/:id', getSubscriber, (req, res) => {
 
 // Creating one
 router.post('/', async (req, res) => {
-  const subscriber = new Subscriber({
+  const subscriber = new infoPersonal({
     nombre: req.body.nombre,
     apellidos: req.body.apellidos,
     edad: req.body.edad
