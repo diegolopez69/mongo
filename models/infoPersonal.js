@@ -1,6 +1,6 @@
-const mongoose = require('mongoose') //para interactuar con la bd de mongo
+const mongoose = require('mongoose')
 
-const infoPersonalSchema = new mongoose.Schema({
+const subscriberSchema = new mongoose.Schema({
   nombre: {
     type: String,
     required: true
@@ -13,11 +13,11 @@ const infoPersonalSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  Date: {
+  subscribeDate: {
     type: Date,
     required: true,
     default: Date.now
   }
 })
 
-module.exports = mongoose.model('infoPersonal', infoPersonalSchema) //El primero es el nombre de la bd y el segundo es el esquema que corresponde a un modelo
+module.exports = mongoose.model('Subscriber', subscriberSchema)

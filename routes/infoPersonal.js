@@ -1,8 +1,8 @@
-const express = require('express')  //Llama a express en la app
-const router = express.Router()     //Llama al router en la app
-const Subscriber = require('../models/subscriber')
+const express = require('express')
+const router = express.Router()
+const Subscriber = require('../models/infoPersonal')
 
-// Obtener todos los usuarios
+// Getting all
 router.get('/', async (req, res) => {
   try {
     const subscribers = await Subscriber.find()
@@ -12,16 +12,17 @@ router.get('/', async (req, res) => {
   }
 })
 
-// Obtener un usuario en específico
+// Getting One
 router.get('/:id', getSubscriber, (req, res) => {
   res.json(res.subscriber)
 })
 
-// Crear un usuario
+// Creating one
 router.post('/', async (req, res) => {
   const subscriber = new Subscriber({
-    name: req.body.name,
-    subscribedToChannel: req.body.subscribedToChannel
+    nombre: req.body.nombre,
+    apellidos: req.body.apellidos,
+    edad: req.body.edad
   })
   try {
     const newSubscriber = await subscriber.save()
@@ -31,13 +32,16 @@ router.post('/', async (req, res) => {
   }
 })
 
-// Actualizar un usuario en específico
+// Updating One
 router.patch('/:id', getSubscriber, async (req, res) => {
-  if (req.body.name != null) {
-    res.subscriber.name = req.body.name
+  if (req.body.nombre != null) {
+    res.subscriber.nombre = req.body.nombre
   }
-  if (req.body.subscribedToChannel != null) {
-    res.subscriber.subscribedToChannel = req.body.subscribedToChannel
+  if (req.body.apellidos != null) {
+    res.subscriber.apellidos = req.body.apellidos
+  }
+  if (req.body.edad != null) {
+    res.subscriber.edad = req.body.edad
   }
   try {
     const updatedSubscriber = await res.subscriber.save()
@@ -47,7 +51,7 @@ router.patch('/:id', getSubscriber, async (req, res) => {
   }
 })
 
-// Eliminar un usuario específico
+// Deleting One
 router.delete('/:id', getSubscriber, async (req, res) => {
   try {
     await res.subscriber.remove()
