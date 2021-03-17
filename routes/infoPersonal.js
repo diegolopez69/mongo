@@ -1,6 +1,6 @@
 const express = require('express')  //Llama a express en la app
 const router = express.Router()     //Llama al router en la app
-const Subscriber = require('../models/subscriber')
+const Subscriber = require('../models/infoPersonal')
 
 // Obtener todos los usuarios
 router.get('/', async (req, res) => {
