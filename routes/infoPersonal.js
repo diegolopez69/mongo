@@ -20,8 +20,9 @@ router.get('/:id', getSubscriber, (req, res) => {
 // Crear un usuario
 router.post('/', async (req, res) => {
   const subscriber = new Subscriber({
-    name: req.body.name,
-    subscribedToChannel: req.body.subscribedToChannel
+    nombre: req.body.nombre,
+    apellidos: req.body.apellidos,
+    edad: req.body.edad    
   })
   try {
     const newSubscriber = await subscriber.save()
@@ -33,11 +34,14 @@ router.post('/', async (req, res) => {
 
 // Actualizar un usuario en específico
 router.patch('/:id', getSubscriber, async (req, res) => {
-  if (req.body.name != null) {
-    res.subscriber.name = req.body.name
+  if (req.body.nombre != null) {
+    res.subscriber.nombre = req.body.nombre
   }
-  if (req.body.subscribedToChannel != null) {
-    res.subscriber.subscribedToChannel = req.body.subscribedToChannel
+  if (req.body.apellidos != null) {
+    res.subscriber.apellidos = req.body.apellidos
+  }
+  if (req.body.edad != null) {
+    res.subscriber.edad = req.body.edad
   }
   try {
     const updatedSubscriber = await res.subscriber.save()
