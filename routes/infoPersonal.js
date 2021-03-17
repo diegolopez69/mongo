@@ -13,7 +13,7 @@ router.get('/', async (req, res) => {
 })
 
 // Obtener un usuario en específico
-router.get('/:id', getSubscriber, (req, res) => {
+router.get('/:id', getInfoPersonal, (req, res) => {
   res.json(res.InfoPersonal)
 })
 
@@ -33,7 +33,7 @@ router.post('/', async (req, res) => {
 })
 
 // Actualizar un usuario en específico
-router.patch('/:id', getSubscriber, async (req, res) => {
+router.patch('/:id', getInfoPersonal, async (req, res) => {
   if (req.body.nombre != null) {
     res.InfoPersonal.nombre = req.body.nombre
   }
@@ -52,7 +52,7 @@ router.patch('/:id', getSubscriber, async (req, res) => {
 })
 
 // Eliminar un usuario específico
-router.delete('/:id', getSubscriber, async (req, res) => {
+router.delete('/:id', getInfoPersonal, async (req, res) => {
   try {
     await res.InfoPersonal.remove()
     res.json({ message: 'Deleted infoPersonal' })
@@ -61,15 +61,16 @@ router.delete('/:id', getSubscriber, async (req, res) => {
   }
 })
 
-async function getSubscriber(req, res, next) {
+//Se mueve al siguiente pedazo de código
+async function getInfoPersonal(req, res, next) {
   let InfoPersonal
   try {
     InfoPersonal = await infoPersonal.findById(req.params.id)
     if (InfoPersonal == null) {
-      return res.status(404).json({ message: 'Cannot find InfoPersonal' })
+      return res.status(404).json({ message: 'Cannot find InfoPersonal' }) //El código significa que no se pudo encontrar algo
     }
   } catch (err) {
-    return res.status(500).json({ message: err.message })
+    return res.status(500).json({ message: err.message }) //Algo mal ocurrió con nuestro servidor
   }
 
   res.InfoPersonal = InfoPersonal
