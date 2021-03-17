@@ -1,50 +1,50 @@
 const express = require('express')  //Llama a express en la app
 const router = express.Router()     //Llama al router en la app
-const Subscriber = require('../models/infoPersonal')
+const infoPersonal = require('../models/infoPersonal')
 
 // Obtener todos los usuarios
 router.get('/', async (req, res) => {
   try {
-    const subscribers = await Subscriber.find()
-    res.json(subscribers)
+    const infoPersonals = await infoPersonal.find()
+    res.json(infoPersonals)
   } catch (err) {
-    res.status(500).json({ message: err.message })
+    res.status(500).json({ message: err.message })  //El código 500 significa que hay un error en el
   }
 })
 
 // Obtener un usuario en específico
 router.get('/:id', getSubscriber, (req, res) => {
-  res.json(res.subscriber)
+  res.json(res.InfoPersonal)
 })
 
 // Crear un usuario
 router.post('/', async (req, res) => {
-  const subscriber = new Subscriber({
+  const InfoPersonal = new infoPersonal({
     nombre: req.body.nombre,
     apellidos: req.body.apellidos,
     edad: req.body.edad    
   })
   try {
-    const newSubscriber = await subscriber.save()
-    res.status(201).json(newSubscriber)
+    const newSubscriber = await InfoPersonal.save()
+    res.status(201).json(newSubscriber) //El código 201 signidica objeto creado exitosamente.
   } catch (err) {
-    res.status(400).json({ message: err.message })
+    res.status(400).json({ message: err.message }) //El código 400 significa que el usuario nos dio
   }
 })
 
 // Actualizar un usuario en específico
 router.patch('/:id', getSubscriber, async (req, res) => {
   if (req.body.nombre != null) {
-    res.subscriber.nombre = req.body.nombre
+    res.InfoPersonal.nombre = req.body.nombre
   }
   if (req.body.apellidos != null) {
-    res.subscriber.apellidos = req.body.apellidos
+    res.InfoPersonal.apellidos = req.body.apellidos
   }
   if (req.body.edad != null) {
-    res.subscriber.edad = req.body.edad
+    res.InfoPersonal.edad = req.body.edad
   }
   try {
-    const updatedSubscriber = await res.subscriber.save()
+    const updatedSubscriber = await res.InfoPersonal.save()
     res.json(updatedSubscriber)
   } catch (err) {
     res.status(400).json({ message: err.message })
@@ -54,25 +54,25 @@ router.patch('/:id', getSubscriber, async (req, res) => {
 // Eliminar un usuario específico
 router.delete('/:id', getSubscriber, async (req, res) => {
   try {
-    await res.subscriber.remove()
-    res.json({ message: 'Deleted Subscriber' })
+    await res.InfoPersonal.remove()
+    res.json({ message: 'Deleted infoPersonal' })
   } catch (err) {
     res.status(500).json({ message: err.message })
   }
 })
 
 async function getSubscriber(req, res, next) {
-  let subscriber
+  let InfoPersonal
   try {
-    subscriber = await Subscriber.findById(req.params.id)
-    if (subscriber == null) {
-      return res.status(404).json({ message: 'Cannot find subscriber' })
+    InfoPersonal = await infoPersonal.findById(req.params.id)
+    if (InfoPersonal == null) {
+      return res.status(404).json({ message: 'Cannot find InfoPersonal' })
     }
   } catch (err) {
     return res.status(500).json({ message: err.message })
   }
 
-  res.subscriber = subscriber
+  res.InfoPersonal = InfoPersonal
   next()
 }
 
