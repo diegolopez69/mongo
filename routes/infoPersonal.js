@@ -1,16 +1,11 @@
-const express = require('express')
+import express  from "express";
+import {findAllUsers}  from "./../controllers/userController";
 const router = express.Router()
 const infoPersonal = require('../models/infoPersonal')
 
+
 // Getting all
-router.get('/', async (req, res) => {
-  try {
-    const subscribers = await infoPersonal.find()
-    res.json(subscribers)
-  } catch (err) {
-    res.status(500).json({ message: err.message })
-  }
-})
+router.get('/', findAllUsers)
 
 // Getting One
 router.get('/:id', getSubscriber, (req, res) => {
