@@ -47,7 +47,7 @@ router.patch('/:id', getInfoPersonal, async (req, res) => {
     const updatedSubscriber = await res.InfoPersonal.save()
     res.json(updatedSubscriber)
   } catch (err) {
-    res.status(400).json({ message: err.message })
+    res.status(400).json({ message: err.message }) //El código 400 significa que no se pudo encontrar algo
   }
 })
 
@@ -67,7 +67,7 @@ async function getInfoPersonal(req, res, next) {
   try {
     InfoPersonal = await infoPersonal.findById(req.params.id)
     if (InfoPersonal == null) {
-      return res.status(404).json({ message: 'Cannot find InfoPersonal' }) //El código significa que no se pudo encontrar algo
+      return res.status(404).json({ message: 'Cannot find InfoPersonal' }) //El código 400 significa que no se pudo encontrar algo
     }
   } catch (err) {
     return res.status(500).json({ message: err.message }) //Algo mal ocurrió con nuestro servidor
