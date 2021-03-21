@@ -1,5 +1,22 @@
 const mongoose = require('mongoose') //para interactuar con la bd de mongo
 
+// const addressSchema = new mongoose.Schema({
+//     calle: {
+//       type: String,
+//       require: true
+//     },
+//     edificio: {
+//       type: Number,
+//       require: true
+//     },
+//     piso: {
+//       type: Number,
+//       require: true
+//     }
+//   },{
+//     timestamps: true
+// })
+
 const infoPersonalSchema = new mongoose.Schema({
   nombre: {
     type: String,
@@ -17,13 +34,14 @@ const infoPersonalSchema = new mongoose.Schema({
     type: Boolean,
     required: true
   },
-  direccion: [
+  comida: [
     {
       type: String, 
       required: true,
       enum: ['arroz', 'pollo', 'tomate']
     }
   ],
+  //direccion: [addressSchema],
   Date: {
     type: Date,
     required: true,

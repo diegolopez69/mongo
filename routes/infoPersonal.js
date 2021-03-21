@@ -24,7 +24,7 @@ router.post('/', async (req, res) => {
     apellidos: req.body.apellidos,
     edad: req.body.edad,
     trabajo: req.body.trabajo,
-    direccion: req.body.direccion
+    comida: req.body.comida   
   })
   try {
     const newSubscriber = await InfoPersonal.save()
@@ -48,8 +48,8 @@ router.patch('/:id', getInfoPersonal, async (req, res) => {
   if (req.body.trabajo != null) {
     res.InfoPersonal.trabajo = req.body.trabajo
   }
-  if (req.body.direccion != null) {
-    res.InfoPersonal.direccion = req.body.direccion
+  if (req.body.comida != null) {
+    res.InfoPersonal.comida = req.body.comida
   }
   try {
     const updatedSubscriber = await res.InfoPersonal.save()
