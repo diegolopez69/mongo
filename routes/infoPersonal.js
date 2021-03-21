@@ -1,16 +1,12 @@
-const express = require('express')  //Llama a express en la app
+import express from "express";
+import {findAllUsers} from "./../controllers/useController";
+
 const router = express.Router()     //Llama al router en la app
 const infoPersonal = require('../models/infoPersonal')
 
+
 // Obtener todos los usuarios
-router.get('/', async (req, res) => {
-  try {
-    const infoPersonals = await infoPersonal.find()
-    res.json(infoPersonals)
-  } catch (err) {
-    res.status(500).json({ message: err.message })  //El código 500 significa que hay un error en el
-  }
-})
+router.get('/', findAllUsers)
 
 // Obtener un usuario en específico
 router.get('/:id', getInfoPersonal, (req, res) => {
