@@ -50,4 +50,4 @@ const infoPersonalSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model('infoPersonal', infoPersonalSchema) //El primero es el nombre de la bd y el segundo es el esquema que corresponde a un modelo
-//El primero es el nombre del documento y el segundo es el nombre del esquema que se t
+//El primero es el nombre de la colección y el segundo es el nombre del documento
